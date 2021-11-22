@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MVVMPractice</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="sync">Sync</string>
+    <string name="add">add</string>
+</resources>
