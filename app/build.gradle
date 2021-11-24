@@ -14,7 +14,7 @@ android {
         viewBinding = true
     }
     defaultConfig {
-        applicationId "com.uriolus.mvvmpractice"
+        applicationId "com.uriolus.mvvbeers"
         minSdk 24
         targetSdk 31
         versionCode 1
