@@ -8,6 +8,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uriolus.mvvbeers.databinding.ActivityMainBinding
 import com.uriolus.mvvbeers.domain.model.Beer
+import com.uriolus.mvvbeers.presentation.model.MainState
 import com.uriolus.mvvbeers.presentation.viewmodel.MainViewModel
 import com.uriolus.mvvbeers.presentation.wathceslistview.BeersAdapter
 import kotlinx.coroutines.flow.collect
@@ -23,26 +24,38 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         setUpRecyclerView()
-        setUpListeners()
+        initViewModel()
+    }
+
+    private fun initViewModel() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    viewModel.getAllBeersFlow()
-                        .collect { beers: List<Beer> ->
-                            (binding.beers.adapter as BeersAdapter).updateBeers(beers)
+                    viewModel.getMainStateFlow()
+                        .collect { mainState ->
+                            when (mainState) {
+                                MainState.Idle -> {
+                                    println("State:Idle")
+                                    viewModel.requestAllBeers()}
+                                MainState.Loading -> println("State:Loading") // TODO
+                                is MainState.Loaded -> {
+                                    println("State:Loaded")
+                                    showBeers(mainState.beers)}
+                                MainState.Empty -> println("State:Empty") // TODO
+                            }
                         }
                 }
             }
         }
     }
 
+    private fun showBeers(beers: List<Beer>) {
+        (binding.beers.adapter as BeersAdapter).updateBeers(beers)
+    }
+
     private fun setUpRecyclerView() {
         val linearLayoutManager = LinearLayoutManager(this)
         binding.beers.layoutManager = linearLayoutManager
         binding.beers.adapter = BeersAdapter(this, lifecycleScope)
-    }
-
-    private fun setUpListeners() {
-
     }
 }

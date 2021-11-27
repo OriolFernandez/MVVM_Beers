@@ -1,4 +1,10 @@
 package com.uriolus.mvvbeers.presentation.model
 
-class MainState {
+import com.uriolus.mvvbeers.domain.model.Beer
+
+sealed class MainState {
+    object Idle : MainState()
+    object Empty : MainState()
+    object Loading : MainState()
+    class Loaded(val beers: List<Beer>) : MainState()
 }

@@ -22,9 +22,9 @@ class BeerDataSourceApi(private val api: ApiService) : BeerDataSource {
 
     override fun getAllBeersFlow(): Flow<List<Beer>> {
         return flow {
-            emit(api.getBeers()
+            val beers = api.getBeers()
                 .map { it.toBeer() } // TODO HANDLE EXCEPTION
-            )
+            emit(beers)
         }.flowOn(Dispatchers.IO)
     }
 }
