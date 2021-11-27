@@ -1,13 +1,13 @@
-# H1 MVVBeers
+## MVVBeers
 (Stands for Example/Template application with MVVM pattern about beers, but could be any api oriented app)
 
-# H2 Tech stack
+### Tech stack
 Kotlin
 Clean Architecture
 Coroutines
 Flow (in 3 flavours)
 and maybe jetpack compose.
 
-# H2 First approach
+### First approach
 V1.0.0 - It shows a list of beers, of course it can be any api that returns a list of something.
 
