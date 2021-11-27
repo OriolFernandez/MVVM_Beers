@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class BeerDataSourceApi(val api: ApiService) : BeerDataSource {
+class BeerDataSourceApi(private val api: ApiService) : BeerDataSource {
     private val list: MutableList<Beer> = mutableListOf()
 
     override suspend fun getBeer(beerId: BeerId): Either<GetBeerErrors, Beer> {

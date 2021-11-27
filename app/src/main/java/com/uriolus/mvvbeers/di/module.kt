@@ -6,6 +6,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val featureModule = module {
+
     factory { GetAllBeersUseCase(get()) }
     viewModel {
         MainViewModel(
