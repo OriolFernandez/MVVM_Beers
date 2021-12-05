@@ -5,15 +5,15 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import coil.size.Scale
-import coil.transform.CircleCropTransformation
 import com.uriolus.mvvbeers.R
 import com.uriolus.mvvbeers.domain.model.Beer
 import com.uriolus.mvvbeers.domain.model.BeerId
@@ -52,7 +52,7 @@ internal fun BeerRow(beer: Beer, onBeerClick: (BeerId) -> Unit) {
             modifier = Modifier.size(128.dp)
         )
         Column {
-            Text(beer.name)
+            Text(beer.name, fontSize = 24.sp, fontWeight = FontWeight.Bold)
             Text(beer.description ?: "")
         }
     }
