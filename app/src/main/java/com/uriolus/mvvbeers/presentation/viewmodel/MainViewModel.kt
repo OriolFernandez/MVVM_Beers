@@ -2,11 +2,10 @@ package com.uriolus.mvvbeers.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.uriolus.mvvbeers.domain.model.Beer
 import com.uriolus.mvvbeers.domain.usecase.GetAllBeersUseCase
 import com.uriolus.mvvbeers.presentation.model.MainState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -14,7 +13,10 @@ class MainViewModel(
 ) : ViewModel() {
     private val _mainState = MutableStateFlow<MainState>(MainState.Idle)
 
-    fun getMainStateFlow() = _mainState.asStateFlow()
+    val beersFlow: Flow<List<Beer>> =
+        _mainState
+            .filterIsInstance<MainState.Loaded>()
+            .map { it.beers }
 
     fun requestAllBeers() {
         _mainState.value = MainState.Loading

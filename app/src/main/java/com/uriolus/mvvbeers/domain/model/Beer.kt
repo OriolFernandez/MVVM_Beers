@@ -1,6 +1,6 @@
 package com.uriolus.mvvbeers.domain.model
 
-data class Beer (
+data class Beer(
     val id: BeerId,
     val name: String,
     val imageUrl: String?,
@@ -8,5 +8,5 @@ data class Beer (
 )
 
 @JvmInline
-value class BeerId(private val s: String)
+value class BeerId( val s: String)
 
