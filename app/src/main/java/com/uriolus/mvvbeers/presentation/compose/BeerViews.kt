@@ -20,7 +20,6 @@ import com.uriolus.mvvbeers.domain.model.BeerId
 
 @Composable
 internal fun BeerList(beers: List<Beer>) {
-
     LazyColumn(modifier = Modifier.fillMaxHeight()) {
         items(beers) { beer ->
             BeerRow(beer) { beerId: BeerId ->
@@ -28,12 +27,10 @@ internal fun BeerList(beers: List<Beer>) {
             }
         }
     }
-
 }
 
 @Composable
 internal fun BeerRow(beer: Beer, onBeerClick: (BeerId) -> Unit) {
-
     Row(
         modifier = Modifier
             .clickable(onClick = { onBeerClick(beer.id) })
@@ -59,5 +56,4 @@ internal fun BeerRow(beer: Beer, onBeerClick: (BeerId) -> Unit) {
             Text(beer.description ?: "")
         }
     }
-
 }
