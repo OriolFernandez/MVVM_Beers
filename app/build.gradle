@@ -6,12 +6,13 @@ plugins {
 
 ext {
     kotlin_version = "1.7.0"
-    koin_version = '3.1.3'
+    koin_version = '3.1.4'
 }
 android {
     compileSdk 31
     buildFeatures {
         viewBinding = true
+        compose = true
     }
     defaultConfig {
         applicationId "com.uriolus.mvvbeers"
@@ -30,11 +31,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.0.5'
     }
 }
 
@@ -47,16 +51,31 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+    // ViewModel utilities for Compose
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
     // Koin for Kotlin apps
     implementation "io.insert-koin:koin-android:$koin_version"
+    // Jetpack Compose
+    implementation "io.insert-koin:koin-androidx-compose:$koin_version"
     // Arrow
     implementation("io.arrow-kt:arrow-core:1.0.1")
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
-    //Koil
-    implementation ('com.squareup.picasso:picasso:2.71828')
+    //Images
+    implementation("io.coil-kt:coil-compose:1.3.2")
+    //Compose
+    implementation("androidx.compose.ui:ui:1.0.5")
+    implementation "androidx.activity:activity-compose:1.4.0"
+    // Tooling support (Previews, etc.)
+    implementation("androidx.compose.ui:ui-tooling:1.0.5")
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation("androidx.compose.foundation:foundation:1.0.5")
+    // Material Design
+    implementation("androidx.compose.material:material:1.0.5")
+
+
     // Testing
     testImplementation "io.insert-koin:koin-test:$koin_version"
     testImplementation 'junit:junit:4.+'
