@@ -6,7 +6,7 @@ plugins {
 
 ext {
     kotlin_version = "1.7.0"
-    koin_version = '3.1.3'
+    koin_version = '3.1.4'
 }
 android {
     compileSdk 31
@@ -51,8 +51,12 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+    // ViewModel utilities for Compose
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
     // Koin for Kotlin apps
     implementation "io.insert-koin:koin-android:$koin_version"
+    // Jetpack Compose
+    implementation "io.insert-koin:koin-androidx-compose:$koin_version"
     // Arrow
     implementation("io.arrow-kt:arrow-core:1.0.1")
     //Retrofit
@@ -70,6 +74,7 @@ dependencies {
     implementation("androidx.compose.foundation:foundation:1.0.5")
     // Material Design
     implementation("androidx.compose.material:material:1.0.5")
+
 
     // Testing
     testImplementation "io.insert-koin:koin-test:$koin_version"

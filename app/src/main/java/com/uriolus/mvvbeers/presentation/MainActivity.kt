@@ -16,18 +16,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen(viewModel)
+            MainScreen()
         }
         initViewModel()
     }
 
     private fun initViewModel() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.requestAllBeers()
-                }
-            }
-        }
+
     }
 }

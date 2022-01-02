@@ -3,6 +3,7 @@ package com.uriolus.mvvbeers.data.datasource
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
+import com.uriolus.mvvbeers.data.api.model.ApiStatus
 import com.uriolus.mvvbeers.data.datasource.api.ApiService
 import com.uriolus.mvvbeers.data.datasource.api.mapper.toBeer
 import com.uriolus.mvvbeers.domain.model.Beer
@@ -20,11 +21,16 @@ class BeerDataSourceApi(private val api: ApiService) : BeerDataSource {
         return list.firstOrNull { it.id == beerId }?.right() ?: GetBeerErrors.BeerNotFound.left()
     }
 
-    override fun getAllBeersFlow(): Flow<List<Beer>> {
+    override fun getAllBeersFlow(): Flow<ApiStatus<List<Beer>>> {
         return flow {
-            val beers = api.getBeers()
-                .map { it.toBeer() } // TODO HANDLE EXCEPTION
-            emit(beers)
+            emit(ApiStatus.Loading)
+            try {
+                val beers = api.getBeers()
+                    .map { it.toBeer() }
+                emit(ApiStatus.Loaded(beers))
+            } catch (e: Exception) {
+                emit(ApiStatus.Error(e.localizedMessage))
+            }
         }.flowOn(Dispatchers.IO)
     }
 }
