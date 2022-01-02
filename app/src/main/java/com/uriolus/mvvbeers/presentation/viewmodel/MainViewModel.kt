@@ -27,7 +27,7 @@ class MainViewModel(
     private fun requestAllBeers() {
         _mainState.value = MainState.Loading
         viewModelScope.launch {
-            delay(1000)
+            delay(1000) // For UI testing
             getAllBeersUseCase.exec()
                 .collect { apiResult: ApiStatus<List<Beer>> ->
                     when (apiResult) {
@@ -43,7 +43,6 @@ class MainViewModel(
                         }
                         is ApiStatus.Loading -> _mainState.value = MainState.Loading
                     }
-
                 }
         }
     }

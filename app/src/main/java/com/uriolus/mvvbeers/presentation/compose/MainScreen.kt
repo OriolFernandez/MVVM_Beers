@@ -13,8 +13,6 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun MainScreen() {
     val viewModel: MainViewModel = getViewModel()
-    println("ViewModel $viewModel")
-
     val state: MainState by remember(viewModel) { viewModel.mainScreenState }.collectAsState()
 
     Scaffold(
@@ -30,7 +28,10 @@ fun MainScreen() {
                             BeerList(list)
                         }
                     }
-                    MainState.Loading -> Loading()
+                    MainState.Loading -> {
+                        println("State $state")
+                        Loading()
+                    }
                     is MainState.Error -> println("State $state ${state.error}")
                 }
             }
